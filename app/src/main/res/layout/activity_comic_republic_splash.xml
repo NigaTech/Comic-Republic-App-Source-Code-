@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:id="@+id/constraint_layout"
+    android:background="@drawable/forrest"
+    tools:context=".ComicRepublicSplashActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+        <ImageView
+            android:id="@+id/logoshs"
+            android:layout_width="285dp"
+            android:layout_height="100dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="150dp"
+
+
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:padding="8dp"
+
+
+            android:layout_marginEnd="66dp"
+            android:src="@drawable/comicloginppic" />
+
+
+        <Button
+            android:id="@+id/jumpin"
+            android:layout_width="212dp"
+            android:layout_height="36dp"
+            android:layout_below="@+id/logo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="400dp"
+            android:layout_marginRight="500dp"
+            android:background="@drawable/login_buttons_transpa"
+            android:text="Jump In!"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
+        <Button
+            android:id="@+id/siiiiiggnout"
+            android:layout_width="150dp"
+            android:layout_height="27dp"
+            android:layout_below="@+id/logo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+
+            android:layout_marginRight="500dp"
+            android:background="@drawable/login_buttons_transpa"
+            android:text="Sign Out"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="11dp"
+            android:layout_marginTop="658dp"/>
+
+        <TextView
+            android:id="@+id/texxxt"
+            android:layout_width="202dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/logo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="676dp"
+            android:layout_marginRight="500dp"
+
+
+            android:text="Comic Republic. Version: 1.1"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="9dp"
+            android:gravity="center"
+            android:padding="8dp"/>
+
+        <TextView
+            android:id="@+id/movingttu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="302dp"
+            android:layout_marginEnd="101dp"
+
+
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:padding="8dp"
+
+
+            android:text="A World Of Heroes"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/movingtt"
+            android:layout_width="213dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="302dp"
+            android:layout_marginEnd="101dp"
+
+            android:text="A World Of Heroes"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</ScrollView>

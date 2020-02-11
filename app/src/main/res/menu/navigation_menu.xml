@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:id="@+id/firstmenu">
+        <item
+                android:id="@+id/nav_home111"
+                android:title="CR Weather"
+            android:icon="@drawable/weatherlogo"
+                />
+
+
+
+
+
+        <item android:id="@+id/comic_republic_home"
+            android:title="CR Comic"
+            android:icon="@drawable/littlelogo"
+            />
+
+        <item android:id="@+id/statussaver"
+            android:title="CR Status Saver"
+            android:icon="@drawable/whatsapplogo"
+            />
+
+
+
+
+
+
+        <!--<item-->
+                <!--android:id="@+id/nav_edu"-->
+                <!--android:title="Education"-->
+                <!--android:icon="@drawable/education"/>-->
+
+    </group>
+
+    <group android:id="@+id/secondmenu">
+
+        <item
+                android:id="@+id/nav_share"
+                android:title="Share App"
+            android:icon="@drawable/ic_share"
+            />
+        <item
+                android:id="@+id/nav_contact_blog"
+                android:title="Contact Comic Republic"
+
+            android:icon="@drawable/ic_contactdev"
+            />
+
+        <item
+                android:id="@+id/nav_contact_dev"
+                android:title=""
+            android:visible="false"
+            android:icon="@drawable/ic_contactdev"
+            />
+
+        <item
+            android:id="@+id/nav_rates"
+            android:title="Rate App"
+            android:icon="@drawable/ratelogo"
+            />
+        <!--<item-->
+                <!--android:id="@+id/nav_settings"-->
+                <!--android:title="Settings"/>-->
+    </group>
+
+    <group android:id="@+id/thirdmenu">
+
+        <item android:id="@+id/menu_sign_out"
+            android:title="Sign Out"
+            android:icon="@drawable/ic_signout"/>
+
+    </group>
+
+    <group android:id="@+id/thirdmenuq">
+
+        <item android:id="@+id/menu_sign_outq"
+            android:title="Comic Republic App - Version : 5.1 " />
+
+    </group>
+
+</menu>

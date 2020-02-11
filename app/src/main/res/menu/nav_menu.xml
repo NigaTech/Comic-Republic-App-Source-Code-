@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item android:id="@+id/menu_new_message"
+        android:title="New Message" />
+
+    <item android:id="@+id/cr_chat_app"
+        android:title="CR Comic" />
+
+    <item android:id="@+id/menu_sign_out"
+        android:title="Sign Out" />
+
+    <item android:id="@+id/cr_news_app"
+        android:title="CR News" />
+
+    <item android:id="@+id/menu_exit"
+        android:title="Exit" />
+
+
+
+    <item android:id="@+id/comic_republic_home"
+        android:title="Comic Republic"
+        android:icon="@drawable/ic_comichot"
+        android:iconTint="@color/white"
+        app:showAsAction="ifRoom"/>
+
+</menu>
