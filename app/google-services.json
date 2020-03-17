@@ -1,42 +1,34 @@
 {
   "project_info": {
-    "project_number": "459168635564",
-    "firebase_url": "https://comic-republic-e09bd.firebaseio.com",
-    "project_id": "comic-republic-e09bd",
-    "storage_bucket": "comic-republic-e09bd.appspot.com"
+    "project_number": "535149910232",
+    "firebase_url": "https://comicrepublic-app.firebaseio.com",
+    "project_id": "comicrepublic-app",
+    "storage_bucket": "comicrepublic-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:459168635564:android:139f12044075d4cbda1d09",
+        "mobilesdk_app_id": "1:535149910232:android:bcc6e03010dc0d63515fad",
         "android_client_info": {
-          "package_name": "com.niggatechdeveloper.comicrepublic"
+          "package_name": "com.martinscomic.comicrepublic"
         }
       },
       "oauth_client": [
         {
-          "client_id": "459168635564-uinbj5a3uol5jekv2l9vtv8eq1adtji0.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.niggatechdeveloper.comicrepublic",
-            "certificate_hash": "fa67c73243dba0b0d3e039efe5b966b7cdfa1378"
-          }
-        },
-        {
-          "client_id": "459168635564-g43tkp5j7j168ef76djo6k37ho4ffhj6.apps.googleusercontent.com",
+          "client_id": "535149910232-spepd9tglqutpnd52j3cb8v71kr57hk7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBoDo8LjUtPKysCVVEzYuVsQ_OOcihUN9E"
+          "current_key": "AIzaSyCCZMArNt2vWzDS3g6MmK8PJ8iwB7ScyYo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "459168635564-unq74tt3aiiru05rb4th5b1kgfvv3p88.apps.googleusercontent.com",
+              "client_id": "535149910232-spepd9tglqutpnd52j3cb8v71kr57hk7.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

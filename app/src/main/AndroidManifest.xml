@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.niggatechdeveloper.comicrepublic">
+    package="com.martinscomic.comicrepublic">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
@@ -21,7 +21,7 @@
         android:value="false" />
 
     <application
-        android:name=".MyApplications"
+        android:name="com.martinscomic.comicrepublic.MyApplications"
         android:hardwareAccelerated="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -30,16 +30,16 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ComicRepublicSplashActivity"
+        <activity android:name="com.martinscomic.comicrepublic.ComicRepublicSplashActivity"
             android:noHistory="true"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
 
         </activity>
-        <activity android:name=".image.ImageViewActivity" />
-        <activity android:name=".video.VideoActivity" />
+        <activity android:name="com.martinscomic.comicrepublic.image.ImageViewActivity" />
+        <activity android:name="com.martinscomic.comicrepublic.video.VideoActivity" />
         <activity
-            android:name=".home.StatusHomeActivity"
+            android:name="com.martinscomic.comicrepublic.home.StatusHomeActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".VideoActivity" />
@@ -48,60 +48,60 @@
             android:label="@string/title_activity_image_view"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".CRWeatherActivity"
+            android:name="com.martinscomic.comicrepublic.CRWeatherActivity"
             android:screenOrientation="portrait"
             android:theme="@style/CustomTheme" />
         <activity
-            android:name=".DetailsActivity"
+            android:name="com.martinscomic.comicrepublic.DetailsActivity"
             android:theme="@style/NewMessage" />
         <activity
-            android:name=".ComicRepublicNewsActivity"
+            android:name="com.martinscomic.comicrepublic.ComicRepublicNewsActivity"
             android:theme="@style/NewMessage" />
         <activity
-            android:name=".EmailSignInActivity"
+            android:name="com.martinscomic.comicrepublic.EmailSignInActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme" />
-        <activity android:name=".ChatLogActivity">
+        <activity android:name="com.martinscomic.comicrepublic.ChatLogActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".LatestMessagesActivity" />
+                android:value="com.martinscomic.comicrepublic.LatestMessagesActivity" />
         </activity>
         <activity
-            android:name=".NewMessageActivity"
+            android:name="com.martinscomic.comicrepublic.NewMessageActivity"
             android:label="@string/new_message"
             android:noHistory="true"
             android:theme="@style/NewMessage">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".LatestMessagesActivity" />
+                android:value="com.martinscomic.comicrepublic.LatestMessagesActivity" />
         </activity>
         <activity
-            android:name=".SignUpActivity"
+            android:name="com.martinscomic.comicrepublic.SignUpActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme" />
         <activity
-            android:name=".SignInActivity"
+            android:name="com.martinscomic.comicrepublic.SignInActivity"
             android:label="Start firing messages"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme" />
         <activity
-            android:name=".LatestMessagesActivity"
+            android:name="com.martinscomic.comicrepublic.LatestMessagesActivity"
             android:label="@string/comic_chat"
             android:noHistory="true"
             android:theme="@style/ChatTheme" />
         <activity
-            android:name=".ComicRepublic2Activity"
+            android:name="com.martinscomic.comicrepublic.ComicRepublic2Activity"
             android:theme="@style/SplashTheme" />
         <activity
-            android:name=".ComicFeedsActivity"
+            android:name="com.martinscomic.comicrepublic.ComicFeedsActivity"
             android:label="@string/title_activity_comic_feeds" />
         <activity
-            android:name=".SnapsActivity"
+            android:name="com.martinscomic.comicrepublic.SnapsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme" />
         <activity
-            android:name=".SplashScreenActivity"
-            android:screenOrientation="portrait"
+            android:name="com.martinscomic.comicrepublic.SplashScreenActivity"
+
             android:noHistory="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -112,14 +112,14 @@
         </activity>
         <activity android:name=".MainActivity" />
 
-        <receiver android:name=".ConnectionReceiver">
+        <receiver android:name="com.martinscomic.comicrepublic.ConnectionReceiver">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
 
         <service
-            android:name=".MyFirebaseMessagingService"
+            android:name="com.martinscomic.comicrepublic.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

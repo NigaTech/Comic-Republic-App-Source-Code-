@@ -18,22 +18,20 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="177dp"
-        android:src="@drawable/bestgif" />
+         />
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="290dp"
-        android:layout_height="105dp"
-        android:src="@drawable/comicloginppic"
+        android:layout_width="350dp"
+        android:layout_height="160dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
 
 
-
-        android:layout_marginLeft="20dp"
-
         android:layout_marginRight="20dp"
-        />
+
+        android:src="@drawable/comichomop" />
 
 
     <Button

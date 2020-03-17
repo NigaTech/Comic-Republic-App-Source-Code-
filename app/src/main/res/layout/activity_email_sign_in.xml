@@ -26,12 +26,11 @@
 
         <ImageView
             android:id="@+id/logo"
-            android:layout_width="285dp"
-            android:layout_height="100dp"
-            android:src="@drawable/comicloginppic"
+            android:layout_width="380dp"
+            android:layout_height="150dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
-            />
+            android:src="@drawable/comichomop" />
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textinputlayout"
             android:layout_below="@+id/logo"

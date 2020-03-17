@@ -19,22 +19,22 @@
 
         <ImageView
             android:id="@+id/logoshs"
-            android:layout_width="285dp"
-            android:layout_height="100dp"
+            android:layout_width="379dp"
+            android:layout_height="163dp"
             android:layout_alignParentEnd="true"
+            android:layout_centerHorizontal="true"
+
+
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="150dp"
 
-
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="20dp"
-
+            android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
             android:gravity="center"
+
+
             android:padding="8dp"
-
-
-            android:layout_marginEnd="66dp"
-            android:src="@drawable/comicloginppic" />
+            android:src="@drawable/comichomop" />
 
 
         <Button
@@ -75,11 +75,11 @@
             android:layout_below="@+id/logo"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="676dp"
+            android:layout_marginTop="679dp"
             android:layout_marginRight="500dp"
 
 
-            android:text="Comic Republic. Version: 1.1"
+            android:text="©Comic Republic.        Version: 1.0.0"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="9dp"
