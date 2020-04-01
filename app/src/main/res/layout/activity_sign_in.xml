@@ -10,7 +10,7 @@
     android:background="@color/black">
 <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="48dp"
+    android:layout_height="match_parent"
     >
 
 
@@ -49,19 +49,15 @@
         android:layout_marginRight="10dp"
         />
 
-    <TextView
-        android:id="@+id/textvieww"
-        android:layout_width="wrap_content"
-        android:layout_height="80dp"
-        android:layout_below="@+id/account_sign_in"
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/fb_btn_login"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_below="@+id/account_sign_in"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="15dp"
-
-        android:layout_marginRight="10dp"
-        android:text="OR"
-        android:textColor="@color/white"
-        android:textSize="18dp" />
+        android:layout_marginRight="10dp"/>
 
     <Button
         android:id="@+id/signup_link_btn"
@@ -71,7 +67,20 @@
         android:text="Sign up with Email "
         android:textColor="@color/white"
         android:textAllCaps="false"
-        android:textSize="15dp"
+        android:textSize="13dp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+
+        android:drawableLeft="@drawable/email"
+        android:drawablePadding="1dp"
+
+        android:gravity="center_vertical"
+
+        android:inputType="textCapWords"
+        android:padding="10dp"
+        android:singleLine="true"
+
+
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/account_sign_in"
         android:layout_marginLeft="20dp"
@@ -80,14 +89,16 @@
 
         />
 
-
-
-
-
-
-
-
-
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:visibility="invisible"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="321dp"
+        android:layout_marginEnd="170dp" />
 
 
 </RelativeLayout>

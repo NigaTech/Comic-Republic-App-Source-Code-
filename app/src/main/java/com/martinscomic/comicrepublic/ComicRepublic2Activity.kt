@@ -72,7 +72,7 @@ class ComicRepublic2Activity : AppCompatActivity(),ConnectionReceiver.Connection
 
                 }else{
                     web_view.visibility = View.INVISIBLE
-                    progress_bar.visibility = View.VISIBLE
+
 
                     Toast.makeText(view?.context,"NO INTERNET CONNECTION", Toast.LENGTH_SHORT).show()
 
@@ -84,7 +84,7 @@ class ComicRepublic2Activity : AppCompatActivity(),ConnectionReceiver.Connection
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
                 view?.visibility = View.INVISIBLE
-                progress_bar.visibility = View.VISIBLE
+
                 pageLoadingFinished = false
             }
 
@@ -92,7 +92,7 @@ class ComicRepublic2Activity : AppCompatActivity(),ConnectionReceiver.Connection
                 super.onPageFinished(view, url)
                 if (ConnectionReceiver.isConnected) {
                     view?.visibility = View.VISIBLE
-                    progress_bar.visibility = View.INVISIBLE
+
                     pageLoadingFinished = true
 
                 }
@@ -108,7 +108,7 @@ class ComicRepublic2Activity : AppCompatActivity(),ConnectionReceiver.Connection
 
         } else {
             web_view.visibility = View.INVISIBLE
-            progress_bar.visibility = View.VISIBLE
+
 
 
         }
@@ -163,7 +163,7 @@ class ComicRepublic2Activity : AppCompatActivity(),ConnectionReceiver.Connection
                 urlHistory.removeAt(urlHistory.size - 1)
             }
             web_view.visibility = View.INVISIBLE
-            progress_bar.visibility = View.VISIBLE
+
 
             Toast.makeText(baseContext,"NO INTERNET CONNECTION!!", Toast.LENGTH_SHORT).show()
             pageLoadingFinished = false

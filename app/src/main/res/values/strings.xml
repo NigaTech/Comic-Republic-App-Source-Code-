@@ -2,8 +2,11 @@
     <string name="app_name">Comic Republic</string>
     <string name="app_open">open</string>
     <string name="app_close">close</string>
-    <string name="facebook_application_id" translatable="false">2505850629692757</string>
-    <string name="facebook_login_protocol_scheme" translatable="false">fb2505850629692757</string>
+
+    <string name="facebook_app_id">332070941086774</string>
+    <string name="fb_login_protocol_scheme">fb332070941086774</string>
+
+
     <string name="comic_chat">CR Chat</string>
     <string name="new_message">New Message</string>
 
@@ -69,6 +72,8 @@
     <string name="exit">Exit</string>
     <string name="title_activity_image_view">ImageViewActivity</string>
     <string name="developer_key">AIzaSyCw9IKp0PJ1E0Ze_huv7itmUvTvdL8YggE</string>
+
+
 
 
 </resources>

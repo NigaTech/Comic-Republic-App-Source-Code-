@@ -193,7 +193,7 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
 
                 }else{
                     web_view.visibility = View.INVISIBLE
-                    progress_bar.visibility = View.VISIBLE
+
 
                     Toast.makeText(view?.context,"NO INTERNET CONNECTION", Toast.LENGTH_SHORT).show()
 
@@ -210,7 +210,7 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
                 // Do something
 
                 view?.visibility = View.INVISIBLE
-                progress_bar.visibility = View.VISIBLE
+
                 pageLoadingFinished = false
             }
 
@@ -223,7 +223,6 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
                 }
                 if (ConnectionReceiver.isConnected) {
                     view?.visibility = View.VISIBLE
-                    progress_bar.visibility = View.INVISIBLE
                     pageLoadingFinished = true
 
 
@@ -275,7 +274,7 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
 
         } else {
             web_view.visibility = View.INVISIBLE
-            progress_bar.visibility = View.VISIBLE
+
 
 
         }
@@ -306,7 +305,7 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
                 urlHistory.removeAt(urlHistory.size - 1)
             }
             web_view.visibility = View.INVISIBLE
-            progress_bar.visibility = View.VISIBLE
+
 
 
             Toast.makeText(baseContext,"NO INTERNET CONNECTION!!", Toast.LENGTH_SHORT).show()

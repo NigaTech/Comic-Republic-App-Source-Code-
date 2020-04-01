@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
 
     android:id="@+id/constraint_layout"
-    android:background="@drawable/forrest"
+    android:background="@color/black"
     tools:context=".ComicRepublicSplashActivity">
 
 
@@ -16,9 +16,15 @@
         android:layout_height="match_parent"
         >
 
+        <pl.droidsonroids.gif.GifImageView
+
+            android:layout_width="match_parent"
+            android:layout_height="370dp"
+            android:src="@drawable/updategif" />
+
 
         <ImageView
-            android:id="@+id/logoshs"
+            android:id="@+id/logoshsr"
             android:layout_width="379dp"
             android:layout_height="163dp"
             android:layout_alignParentEnd="true"
@@ -34,7 +40,7 @@
 
 
             android:padding="8dp"
-            android:src="@drawable/comichomop" />
+             />
 
 
         <Button
@@ -47,7 +53,7 @@
             android:layout_marginTop="400dp"
             android:layout_marginRight="500dp"
             android:background="@drawable/login_buttons_transpa"
-            android:text="Jump In!"
+            android:text="Jump In"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="18dp" />
@@ -79,7 +85,7 @@
             android:layout_marginRight="500dp"
 
 
-            android:text="©Comic Republic.        Version: 1.0.0"
+            android:text="©Comic Republic.        Version: 1.0.1"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="9dp"
@@ -87,7 +93,7 @@
             android:padding="8dp"/>
 
         <TextView
-            android:id="@+id/movingttu"
+            android:id="@+id/logoshs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -109,6 +115,43 @@
             android:textColor="@color/white"
             android:textSize="24dp"
             android:textStyle="bold" />
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/current_user_nav_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            app:layout_constraintBottom_toTopOf="@+id/current_email_nav_header"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/current_email_nav_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+
+
+
+
+
         <TextView
             android:id="@+id/movingtt"
             android:layout_width="213dp"
@@ -119,9 +162,27 @@
             android:layout_marginTop="302dp"
             android:layout_marginEnd="101dp"
 
-            android:text="A World Of Heroes"
+            android:text="A W"
             android:textColor="@color/white"
             android:textSize="24dp"
+            android:textStyle="bold" />
+
+
+
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="213dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="480dp"
+            android:layout_marginEnd="101dp"
+
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="20dp"
             android:textStyle="bold" />
 
     </RelativeLayout>
