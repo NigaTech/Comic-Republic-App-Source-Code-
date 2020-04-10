@@ -7,7 +7,9 @@ import android.os.Bundle
 import android.util.Base64
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.facebook.*
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -23,14 +25,19 @@ import org.jetbrains.anko.clearTask
 import org.jetbrains.anko.indeterminateProgressDialog
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.newTask
-import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginResult
+import com.google.firebase.auth.FacebookAuthProvider
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
 class SignInActivity : AppCompatActivity() {
 
     private val RC_SIGN_IN = 1
+
+    var firebaseAuth:FirebaseAuth?=null
+    var callbackManager:CallbackManager?=null
+
 
     private val signInProviders =
         listOf(
@@ -39,7 +46,6 @@ class SignInActivity : AppCompatActivity() {
                 .setRequireName(true)
                 .build()
         )
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
@@ -59,9 +65,51 @@ class SignInActivity : AppCompatActivity() {
             startActivity(Intent(this, EmailSignInActivity::class.java))
         }
 
+        firebaseAuth = FirebaseAuth.getInstance()
+        callbackManager = CallbackManager.Factory.create()
+        fb_btn_login.setReadPermissions("email")
+        fb_btn_login.setOnClickListener {
+            signIn()
+        }
 
-        printKeyHash()
+
     }
+
+    private fun signIn() {
+        fb_btn_login.registerCallback(callbackManager, object:FacebookCallback<LoginResult>{
+            override fun onSuccess(result: LoginResult?) {
+                handleFacebookAcessToken(result!!.accessToken)
+            }
+
+            override fun onCancel() {
+
+            }
+
+            override fun onError(error: FacebookException?) {
+
+            }
+
+        })
+    }
+
+    private fun handleFacebookAcessToken(accessToken: AccessToken?) {
+        val credential = FacebookAuthProvider.getCredential(accessToken!!.token)
+        firebaseAuth!!.signInWithCredential(credential)
+            .addOnFailureListener { e->
+                Toast.makeText(this,e.message,Toast.LENGTH_LONG).show()
+                Log.e( "ERROR_EDMT",e.message)
+            }
+            .addOnSuccessListener { result ->
+                val email = result.user!!.email
+                Toast.makeText(this, "You Logged with email : "+email,Toast.LENGTH_LONG).show()
+
+            }
+
+    }
+
+
+
+
 
     private fun printKeyHash() {
         try {
@@ -85,6 +133,10 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
+        callbackManager!!.onActivityResult(requestCode,requestCode,data)
+
+
 
         if (requestCode == RC_SIGN_IN) {
             val response = IdpResponse.fromResultIntent(data)

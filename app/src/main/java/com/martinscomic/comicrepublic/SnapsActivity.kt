@@ -147,7 +147,7 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
             }
         }
         myWebView = findViewById(R.id.web_view)
-        progressBar?.visibility = View.VISIBLE
+
         myWebView?.webViewClient = Browser_home()
         myWebView?.webChromeClient = MyChrome()
         val webSettings = myWebView?.settings
@@ -193,6 +193,8 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
 
                 }else{
                     web_view.visibility = View.INVISIBLE
+                    progress_barss.visibility = View.VISIBLE
+
 
 
                     Toast.makeText(view?.context,"NO INTERNET CONNECTION", Toast.LENGTH_SHORT).show()
@@ -205,38 +207,26 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
 
 
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-                super.onPageStarted(view, url, favicon)
-                // Page loading started
-                // Do something
 
-                view?.visibility = View.INVISIBLE
-
+                progress_bar.visibility = View.VISIBLE
                 pageLoadingFinished = false
+                progress_barss.visibility = View.INVISIBLE
+
             }
 
+
             override fun onPageFinished(view: WebView?, url: String?) {
-                super.onPageFinished(view, url)
-                // Page loading finished
-                // Display the loaded page title in a toast message
-                if (view != null) {
-                    toast(" ${view.title} \uD83D\uDE0A")
-                }
+
                 if (ConnectionReceiver.isConnected) {
                     view?.visibility = View.VISIBLE
+                    progress_bar.visibility = View.INVISIBLE
                     pageLoadingFinished = true
 
 
-                }else {
-
-                    val intent = YouTubeStandalonePlayer.createVideoIntent(
-                        Activity(),
-                        getString(R.string.developer_key),
-                        VIDEO_ID
-                    )
-                    startActivity(intent)
                 }
             }
         }
+
 
         web_view.loadUrl(url)
 
@@ -247,6 +237,7 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
         if (!message.isNullOrEmpty()) {
             AlertDialog.Builder(this)
                 .setTitle("Comic Republic Notification!!")
+                .setIcon(R.drawable.comicmainbg)
                 .setMessage(message)
                 .setPositiveButton("OKAY! \uD83D\uDE0A", DialogInterface.OnClickListener { dialogInterface, i -> })
                 .show()
@@ -269,15 +260,7 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
             })
 
         urlHistory.add(url)
-        if (ConnectionReceiver.isConnected) {
 
-
-        } else {
-            web_view.visibility = View.INVISIBLE
-
-
-
-        }
 
 
     }
@@ -305,6 +288,7 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
                 urlHistory.removeAt(urlHistory.size - 1)
             }
             web_view.visibility = View.INVISIBLE
+            progress_barss.visibility = View.VISIBLE
 
 
 
@@ -325,7 +309,7 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
 
         override fun onPageFinished(view: WebView, url: String) {
             title = view.title
-            progressBar!!.visibility = View.GONE
+
             super.onPageFinished(view, url)
         }
     }

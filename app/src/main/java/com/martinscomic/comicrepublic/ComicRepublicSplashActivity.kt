@@ -1,14 +1,19 @@
 package com.martinscomic.comicrepublic
 
+
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.view.animation.AnimationUtils
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.billkainkoom.quickdialog.QuickDialog
+import com.billkainkoom.quickdialog.QuickDialogType
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -16,16 +21,22 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_comic_republic_splash.*
-import kotlinx.android.synthetic.main.activity_sign_in.*
 
 
 class ComicRepublicSplashActivity : AppCompatActivity() {
 
+    private var button: Button? = null
+    var context: Context? = null
+    private val RC_SIGN_IN = 1
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comic_republic_splash)
+
+
+
+
 
 // Configure sign-in to request the user's ID, email address, and basic
 // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -47,6 +58,10 @@ class ComicRepublicSplashActivity : AppCompatActivity() {
         movingtt.text=""
 
 
+        button = findViewById(R.id.jumpin) as Button
+
+        context= this
+
 
         jumpin.setOnClickListener {
             val animation = AnimationUtils.loadAnimation(this, R.anim.zoom_out)
@@ -55,6 +70,11 @@ class ComicRepublicSplashActivity : AppCompatActivity() {
             Toast.makeText(applicationContext,R.string.opening_message,Toast.LENGTH_LONG).show()
 
             startActivity(Intent(this, SnapsActivity::class.java))
+
+
+
+            d2(context as ComicRepublicSplashActivity)
+
         }
 
         val animation = AnimationUtils.loadAnimation(this, R.anim.bounce)
@@ -87,16 +107,48 @@ class ComicRepublicSplashActivity : AppCompatActivity() {
     }
 
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            val task =
+                GoogleSignIn.getSignedInAccountFromIntent(data)
+            handleSignInResult(task)
+        }
+    }
+
+
+    fun d2(context: Context) {
+
+        QuickDialog(
+
+            context = context,
+            style = QuickDialogType.Progress,
+            title = "Please wait",
+            image = R.drawable.littlelogo,
+            message = "Opening the World Of Heroes")
+            .overrideButtonNames("OK").overrideClicks({ ->
+
+            }).show()
+    }
+
     override fun onBackPressed() {
 
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Notification For Exit")
+        builder.setIcon(R.drawable.comicmainbg)
         builder.setMessage("Are you sure you want to Exit Comic Republic?")
         builder.setPositiveButton("Yes",{ dialogInterface: DialogInterface, i: Int ->
             finish()
         })
         builder.setNegativeButton("No, Stay! \uD83D\uDE0A",{ dialogInterface: DialogInterface, i: Int -> })
         builder.show()
+
+
+
 
     }
 
