@@ -8,98 +8,95 @@
     tools:context=".SignInActivity"
     android:id="@+id/constraint_layout"
     android:background="@color/black">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
 
 
-    <pl.droidsonroids.gif.GifImageView
-        android:layout_width="394dp"
-        android:layout_height="385dp"
-        android:layout_alignParentEnd="true"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="6dp"
-        android:layout_marginBottom="7dp"
-        android:src="@drawable/bestgif" />
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="394dp"
+            android:layout_height="385dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="7dp"
+            android:src="@drawable/bestgif" />
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="400dp"
-        android:layout_height="220dp"
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="400dp"
+            android:layout_height="220dp"
 
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="215dp"
-        android:layout_marginRight="10dp"
-        android:src="@drawable/comichomop" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="215dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/comichomop" />
 
-    <com.shobhitpuri.custombuttons.GoogleSignInButton
-        android:id="@+id/account_sign_in"
-        android:layout_width="290dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/logo"
-        android:text="@string/google_sign_up"
-        app:isDarkTheme="true"
+        <com.shobhitpuri.custombuttons.GoogleSignInButton
+            android:id="@+id/account_sign_in"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/logo"
+            android:text="@string/google_sign_up"
+            app:isDarkTheme="true"
 
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="115dp"
-        android:layout_marginRight="10dp"
-        />
-
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/fb_btn_login"
-        android:layout_width="290dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/account_sign_in"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="10dp"/>
-
-    <Button
-        android:id="@+id/signup_link_btn"
-        android:layout_width="290dp"
-        android:layout_height="37dp"
-        android:background="@drawable/login_buttons_backgroundpurple"
-        android:text="Sign up with Email "
-        android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:textSize="13dp"
-        android:textStyle="bold"
-        android:textAlignment="center"
-
-        android:drawableLeft="@drawable/email"
-        android:drawablePadding="1dp"
-
-        android:gravity="center_vertical"
-
-        android:inputType="textCapWords"
-        android:padding="10dp"
-        android:singleLine="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginRight="10dp"
+            />
 
 
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/account_sign_in"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="55dp"
-        android:layout_marginRight="10dp"
-
-        />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:visibility="invisible"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="321dp"
-        android:layout_marginEnd="170dp" />
 
 
-</RelativeLayout>
+
+
+        <Button
+            android:id="@+id/signup_link_btn1"
+            android:layout_width="290dp"
+            android:layout_height="37dp"
+            android:background="@drawable/login_buttons_backgroundpurple"
+            android:text="Sign up with Email "
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:textSize="13dp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+
+            android:drawableLeft="@drawable/email"
+            android:drawablePadding="1dp"
+
+            android:gravity="center_vertical"
+
+            android:inputType="textCapWords"
+            android:padding="10dp"
+            android:singleLine="true"
+
+
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/account_sign_in"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="10dp"
+
+            />
+
+
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:visibility="invisible"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="321dp"
+            android:layout_marginEnd="170dp" />
+
+
+    </RelativeLayout>
 </ScrollView>

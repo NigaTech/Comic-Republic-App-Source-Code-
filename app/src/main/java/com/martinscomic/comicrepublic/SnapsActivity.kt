@@ -17,10 +17,6 @@ import android.provider.MediaStore.Video.Thumbnails.VIDEO_ID
 import android.util.Log
 import android.view.View
 import android.webkit.*
-import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -42,9 +38,16 @@ import android.webkit.WebViewClient
 import android.os.Bundle
 import android.webkit.DownloadListener
 import android.content.BroadcastReceiver
+import android.os.Vibrator
+import android.widget.*
 import androidx.annotation.RequiresApi
-
-
+import com.bumptech.glide.Glide
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.tasks.Task
 
 
 class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverListener {
@@ -70,15 +73,13 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
     private val PERMISSION_REQUEST_CODE = 1234
     private val PermissionsRequestCode = 123
     var counter = 5
-
-
-
+    var tv_image: ImageView? = null
+    private val googleApiClient: GoogleApiClient? = null
+    private val gso: GoogleSignInOptions? = null
+    private val RC_SIGN_IN = 1
     lateinit var web_view: WebView
 
-
-
-
-
+    private lateinit var firebaseAuth: FirebaseAuth
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,6 +88,55 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
         baseContext.registerReceiver(ConnectionReceiver(), IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
         MyApplications.instance.setConnectionListener(this)
 
+
+
+        val gso =
+            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build()
+// Build a GoogleSignInClient with the options specified by gso.
+        val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+
+        settinggggsss.setOnClickListener {
+            startActivity(Intent(this, ProfileAccountActivity::class.java))
+
+        }
+
+
+        val mAuth = FirebaseAuth.getInstance().currentUser
+        mAuth?.let {
+            for (profile in it.providerData) {
+
+
+
+                Glide.with(this).load(mAuth?.photoUrl).into(tv_imagessseee)
+
+
+
+            }
+        }
+
+        tv_imagesss.setOnClickListener {
+            startActivity(Intent(this, ProfileAccountActivity::class.java))
+
+        }
+
+        val acct = GoogleSignIn.getLastSignedInAccount(this)
+        if (acct != null) {
+            Glide.with(this).load(acct.photoUrl).into(tv_imagesss)
+        }
+
+
+        val user = FirebaseAuth.getInstance().currentUser
+        user?.let {
+            // Name, email address, and profile photo Url
+
+
+
+            Glide.with(this).load(user.photoUrl).into(tv_imagessseee)
+
+
+        }
 
 
 
@@ -230,23 +280,30 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
 
         web_view.loadUrl(url)
 
-        val intent = intent
+
+
 
         val message = intent.getStringExtra("fcm_message")
+
 
         if (!message.isNullOrEmpty()) {
             AlertDialog.Builder(this)
                 .setTitle("Comic Republic Notification!!")
-                .setIcon(R.drawable.comicmainbg)
                 .setMessage(message)
+                .setIcon(R.drawable.comicmainbg)
+                // Set the intent that will fire when the user taps the notification
                 .setPositiveButton("OKAY! \uD83D\uDE0A", DialogInterface.OnClickListener { dialogInterface, i -> })
                 .show()
+            val vibratorService = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            vibratorService.vibrate(500)
+
+
         }
-
         FirebaseMessaging.getInstance().isAutoInitEnabled = true
-
         FirebaseInstanceId.getInstance().instanceId
             .addOnCompleteListener(OnCompleteListener { task ->
+                val vibratorService = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+                vibratorService.vibrate(500)
                 if (!task.isSuccessful) {
                     Log.w(TAG, "getInstanceId failed", task.exception)
                     return@OnCompleteListener
@@ -258,9 +315,39 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
                 // Log and toast
 
             })
-
         urlHistory.add(url)
+    }
 
+
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+// Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+
+
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            val task =
+                GoogleSignIn.getSignedInAccountFromIntent(data)
+            handleSignInResult(task)
+        }
+    }
+
+
+    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) = try {
+        val account =
+            completedTask.getResult(ApiException::class.java)
+
+        Glide.with(this).load(account!!.photoUrl).into(tv_imagesss)
+
+
+    }
+    catch (e: ApiException) {
+
+        Toast.makeText(applicationContext, "image not found", Toast.LENGTH_LONG).show()
 
 
     }
@@ -368,7 +455,7 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
         request.setMimeType(mimetype)
         request.addRequestHeader("cookie", CookieManager.getInstance().getCookie(url))
         request.addRequestHeader("User-Agent", userAgent)
-        
+
         request.setTitle(URLUtil.guessFileName(url, contentDisposition, mimetype))
         request.allowScanningByMediaScanner()
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)

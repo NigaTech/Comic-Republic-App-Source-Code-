@@ -1,23 +1,36 @@
 package com.martinscomic.comicrepublic
 
 
+import android.Manifest
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
+import android.os.Vibrator
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.billkainkoom.quickdialog.QuickDialog
 import com.billkainkoom.quickdialog.QuickDialogType
+import com.bumptech.glide.Glide
+import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.auth.api.signin.GoogleSignInResult
+import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.common.api.ResultCallback
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_comic_republic_splash.*
@@ -29,10 +42,45 @@ class ComicRepublicSplashActivity : AppCompatActivity() {
     var context: Context? = null
     private val RC_SIGN_IN = 1
 
+    var logoutBtn: Button? = null
+    var userName: TextView? = null
+    var userEmail:TextView? = null
+    var userId:TextView? = null
+
+    var tv_image: ImageView? = null
+
+    private val googleApiClient: GoogleApiClient? = null
+    private val gso: GoogleSignInOptions? = null
+    private lateinit var firebaseAuth: FirebaseAuth
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comic_republic_splash)
+
+        button = findViewById(R.id.jumpin) as Button
+
+
+
+
+        firebaseAuth = FirebaseAuth.getInstance()
+
+
+
+
+
+        val mAuth = FirebaseAuth.getInstance().currentUser
+        mAuth?.let {
+            for (profile in it.providerData) {
+
+                tv_emailems.text = mAuth.email
+
+                Glide.with(this).load(mAuth?.photoUrl).into(tv_imagesssssss)
+
+
+
+            }
+        }
 
 
 
@@ -48,8 +96,7 @@ class ComicRepublicSplashActivity : AppCompatActivity() {
                 .requestEmail()
                 .build()
 // Build a GoogleSignInClient with the options specified by gso.
-        val mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
+        val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
 
 
@@ -58,9 +105,19 @@ class ComicRepublicSplashActivity : AppCompatActivity() {
         movingtt.text=""
 
 
-        button = findViewById(R.id.jumpin) as Button
-
         context= this
+
+
+
+        tv_images.setOnClickListener {
+            startActivity(Intent(this, ProfileAccountActivity::class.java))
+
+        }
+
+        settingggg.setOnClickListener {
+            startActivity(Intent(this, ProfileAccountActivity::class.java))
+
+        }
 
 
         jumpin.setOnClickListener {
@@ -68,13 +125,31 @@ class ComicRepublicSplashActivity : AppCompatActivity() {
             logoshs.startAnimation(animation)
             Handler().postDelayed({ logoshs.visibility = View.GONE }, 2800)
             Toast.makeText(applicationContext,R.string.opening_message,Toast.LENGTH_LONG).show()
-
             startActivity(Intent(this, SnapsActivity::class.java))
-
-
-
             d2(context as ComicRepublicSplashActivity)
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CALL_PHONE), 10)
+            }
 
+
+            val vibratorService = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            vibratorService.vibrate(200)
+        }
+
+        openwallpp.setOnClickListener {
+            val animation = AnimationUtils.loadAnimation(this, R.anim.zoom_out)
+            logoshs.startAnimation(animation)
+            Handler().postDelayed({ logoshs.visibility = View.GONE }, 2800)
+            Toast.makeText(applicationContext,R.string.opening_message,Toast.LENGTH_LONG).show()
+            startActivity(Intent(this, ComicWallpaperActivity::class.java))
+            d2(context as ComicRepublicSplashActivity)
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CALL_PHONE), 10)
+            }
+
+
+            val vibratorService = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            vibratorService.vibrate(200)
         }
 
         val animation = AnimationUtils.loadAnimation(this, R.anim.bounce)
@@ -84,34 +159,53 @@ class ComicRepublicSplashActivity : AppCompatActivity() {
 
         Handler().postDelayed({ logoshs.visibility = View.GONE }, 2500)
 
-        siiiiiggnout.startAnimation(animation)
 
 
-        texxxt.startAnimation(animation)
 
-        siiiiiggnout.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-            val intent = Intent(this, SignInActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-            Toast.makeText(applicationContext,R.string.signing_out,Toast.LENGTH_LONG).show()
-            startActivity(intent)
-            finish()
-        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         val acct = GoogleSignIn.getLastSignedInAccount(this)
         if (acct != null) {
-            tv_name.text = acct.displayName
-            tv_name.visibility = View.VISIBLE
+
+            tv_email.text = acct.email
+            tv_email.visibility = View.VISIBLE
+
+            Glide.with(this).load(acct.photoUrl).into(tv_images)
+
+
+
         }
 
+
+
+
     }
+
+
+
+
+
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+// Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
+
+
             // The Task returned from this call is always completed, no need to attach
             // a listener.
             val task =
@@ -128,7 +222,7 @@ class ComicRepublicSplashActivity : AppCompatActivity() {
             context = context,
             style = QuickDialogType.Progress,
             title = "Please wait",
-            image = R.drawable.littlelogo,
+            image = R.drawable.comiclogohome,
             message = "Opening the World Of Heroes")
             .overrideButtonNames("OK").overrideClicks({ ->
 
@@ -139,7 +233,7 @@ class ComicRepublicSplashActivity : AppCompatActivity() {
 
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Notification For Exit")
-        builder.setIcon(R.drawable.comicmainbg)
+        builder.setIcon(R.drawable.comiclogohome)
         builder.setMessage("Are you sure you want to Exit Comic Republic?")
         builder.setPositiveButton("Yes",{ dialogInterface: DialogInterface, i: Int ->
             finish()
@@ -154,17 +248,35 @@ class ComicRepublicSplashActivity : AppCompatActivity() {
 
 
 
-    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
-        try {
-            val account =
-                completedTask.getResult(ApiException::class.java)
+    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) = try {
+        val account =
+            completedTask.getResult(ApiException::class.java)
 
-            tv_name.text = account!!.displayName
-            tv_name.visibility = View.VISIBLE
-        } catch (e: ApiException) {
-           tv_name.text = ""
-            tv_name.visibility = View.VISIBLE
-        }
+        tv_email.text = account?.email
+        tv_email.visibility = View.VISIBLE
+        Glide.with(this).load(account?.photoUrl).into(tv_images)
+
+
+
+
+
+    }
+    catch (e: ApiException) {
+
+        tv_email.text = ""
+        tv_email.visibility = View.VISIBLE
+        tv_image!!.visibility = View.VISIBLE
+        Toast.makeText(applicationContext, "image not found", Toast.LENGTH_LONG).show()
+
+
     }
 
+
+    fun onConnectionFailed(connectionResult: ConnectionResult) {}
+
+
 }
+
+
+
+

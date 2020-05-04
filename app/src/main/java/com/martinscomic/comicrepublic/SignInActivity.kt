@@ -1,6 +1,7 @@
 package com.martinscomic.comicrepublic
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -27,16 +28,25 @@ import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.newTask
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FacebookAuthProvider
+import com.google.firebase.auth.GoogleAuthProvider
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
 class SignInActivity : AppCompatActivity() {
 
-    private val RC_SIGN_IN = 1
+    val RC_SIGN_IN: Int = 1
 
-    var firebaseAuth:FirebaseAuth?=null
-    var callbackManager:CallbackManager?=null
+
+
+    lateinit var mGoogleSignInClient: GoogleSignInClient
+    lateinit var mGoogleSignInOptions: GoogleSignInOptions
+    private lateinit var firebaseAuth: FirebaseAuth
+
+
+
+
 
 
     private val signInProviders =
@@ -50,131 +60,98 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
 
+        firebaseAuth = FirebaseAuth.getInstance()
+
+
+        mGoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        mGoogleSignInClient = GoogleSignIn.getClient(this, mGoogleSignInOptions)
 
 
         account_sign_in.setOnClickListener {
-            val intent = AuthUI.getInstance().createSignInIntentBuilder()
-                .setAvailableProviders(signInProviders)
-                .setLogo(R.drawable.comicloginppic)
-                .build()
-            startActivityForResult(intent, RC_SIGN_IN)
-
-        }
-
-        signup_link_btn.setOnClickListener {
-            startActivity(Intent(this, EmailSignInActivity::class.java))
-        }
-
-        firebaseAuth = FirebaseAuth.getInstance()
-        callbackManager = CallbackManager.Factory.create()
-        fb_btn_login.setReadPermissions("email")
-        fb_btn_login.setOnClickListener {
             signIn()
         }
 
 
+        signup_link_btn1.setOnClickListener {
+            startActivity(Intent(this, EmailSignInActivity::class.java))
+
+        }
+
+    }
+    private fun configureGoogleSignIn() {
+        mGoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        mGoogleSignInClient = GoogleSignIn.getClient(this, mGoogleSignInOptions)
     }
 
     private fun signIn() {
-        fb_btn_login.registerCallback(callbackManager, object:FacebookCallback<LoginResult>{
-            override fun onSuccess(result: LoginResult?) {
-                handleFacebookAcessToken(result!!.accessToken)
-            }
+        val signInIntent: Intent = mGoogleSignInClient.signInIntent
+        startActivityForResult(signInIntent, RC_SIGN_IN)
 
-            override fun onCancel() {
-
-            }
-
-            override fun onError(error: FacebookException?) {
-
-            }
-
-        })
-    }
-
-    private fun handleFacebookAcessToken(accessToken: AccessToken?) {
-        val credential = FacebookAuthProvider.getCredential(accessToken!!.token)
-        firebaseAuth!!.signInWithCredential(credential)
-            .addOnFailureListener { e->
-                Toast.makeText(this,e.message,Toast.LENGTH_LONG).show()
-                Log.e( "ERROR_EDMT",e.message)
-            }
-            .addOnSuccessListener { result ->
-                val email = result.user!!.email
-                Toast.makeText(this, "You Logged with email : "+email,Toast.LENGTH_LONG).show()
-
-            }
-
-    }
-
-
-
-
-
-    private fun printKeyHash() {
-        try {
-            val info = packageManager.getPackageInfo("com.martinscomic.comicrepublic.SignInActivity", PackageManager.GET_SIGNATURES)
-            for (signature in info.signatures)
-            {
-                val md = MessageDigest.getInstance("SHA")
-                md.update(signature.toByteArray())
-                Log.e("KEYHASH", Base64.encodeToString(md.digest(),Base64.DEFAULT))
-            }
-        }
-        catch (e:PackageManager.NameNotFoundException)
-        {
-
-        }
-        catch (e:NoSuchAlgorithmException)
-        {
-
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        callbackManager!!.onActivityResult(requestCode,requestCode,data)
-
-
-
-        if (requestCode == RC_SIGN_IN) {
-            val response = IdpResponse.fromResultIntent(data)
-
-            startActivity(Intent(this, ComicRepublicSplashActivity::class.java))
-
-            if (resultCode == Activity.RESULT_OK) {
-                val progressDialog =
-                    indeterminateProgressDialog("Setting up your Comic Republic Account, This Might Take a While.......")
-                FirestoreUtil.initCurrentUserIfFirstTime {
-                    startActivity(intentFor<ComicRepublicSplashActivity>().newTask().clearTask())
-                    progressDialog.dismiss()
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                    startActivity(intent)
-                    finish()
-
-                }
-
-            } else if (resultCode == Activity.RESULT_CANCELED) {
-                if (response == null) return
-
-
-                when (response.error?.errorCode) {
-
-                }
-            }
-        }
     }
 
     override fun onStart() {
         super.onStart()
-        if (FirebaseAuth.getInstance().currentUser != null) {
-            val intent = Intent(this, ComicRepublicSplashActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
+
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            startActivity(Intent(this, ComicRepublicSplashActivity::class.java))
             finish()
+
+        }
+
+    }
+
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == RC_SIGN_IN) {
+
+            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+
+                val account = task.getResult(ApiException::class.java)
+                account?.let { firebaseAuthWithGoogle(it) }
+            } catch (e: ApiException) {
+                Toast.makeText(this, "Sign in failed", Toast.LENGTH_LONG).show()
+            }
+
+        }
+
+
+
+    }
+
+    private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
+        val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
+        firebaseAuth.signInWithCredential(credential).addOnCompleteListener {
+            if (it.isSuccessful) {
+                startActivity(Intent(this, ComicRepublicSplashActivity::class.java))
+                Toast.makeText(this, "Google Sign in Sucessful", Toast.LENGTH_LONG).show()
+
+            } else {
+
+                Toast.makeText(this, "Google sign in failed ", Toast.LENGTH_LONG).show()
+
+            }
         }
     }
+
+    companion object {
+        fun getLaunchIntent(from: Context) = Intent(from, SignInActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        }
+    }
+
+
+
 
 
 }

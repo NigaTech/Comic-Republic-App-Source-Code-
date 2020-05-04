@@ -9,9 +9,10 @@
     android:id="@+id/constraint_layout"
     android:background="@color/black"
     tools:context=".EmailSignInActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="648dp"
+        android:layout_height="match_parent"
         >
 
 
@@ -19,116 +20,112 @@
             android:layout_width="match_parent"
             android:layout_height="440dp"
             android:layout_alignParentEnd="true"
+            android:src="@drawable/bestgif"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="177dp"
-             />
+            />
 
         <ImageView
             android:id="@+id/logo"
-            android:layout_width="380dp"
-            android:layout_height="150dp"
+            android:layout_width="396dp"
+            android:layout_height="145dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="110dp"
             android:src="@drawable/comichomop" />
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textinputlayout"
-            android:layout_below="@+id/logo"
-            android:layout_centerHorizontal="true"
-            android:layout_width="match_parent"
-            android:textColorHint="@color/white"
-            app:hintTextAppearance="@color/white"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/email_login"
-                android:layout_width="337dp"
-                android:layout_height="41dp"
-                android:layout_below="@+id/logo"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginRight="500dp"
-                android:background="@drawable/inputs_backgroundwhite"
-                android:hint="Email..."
-                android:inputType="textEmailAddress"
-                android:maxLines="5"
-                android:padding="8dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textinputlayout1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/textinputlayout"
-            android:padding="10dp"
-            android:textColorHint="@color/white"
-            app:hintTextAppearance="@color/white"
-            app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/white"
-
-            >
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/password_login"
-                android:layout_width="337dp"
-                android:layout_height="41dp"
-                android:layout_below="@+id/email_login"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginRight="500dp"
-                android:background="@drawable/inputs_backgroundwhite"
-                android:hint="Password..."
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:padding="8dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white" />
-
-        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/login_btn"
-            android:layout_width="325dp"
-            android:layout_height="39dp"
-            android:layout_below="@+id/textinputlayout1"
+            android:layout_width="290dp"
+            android:layout_height="37dp"
+            android:layout_below="@+id/logo"
+
+            android:drawableLeft="@drawable/email"
+            android:textAlignment="center"
+            android:padding="7dp"
+            android:inputType="textCapWords"
+            android:singleLine="true"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="120dp"
             android:layout_marginRight="500dp"
             android:background="@drawable/login_buttons_backgroundblue"
-            android:text="Login"
+            android:text="Log in to Comic Republic"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="18dp"
+            android:textSize="14dp"
 
             />
 
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:text="OR"
+            android:textColor="@color/white"
+            android:layout_marginTop="38dp"
+            android:textSize="18dp"
+            android:textAlignment="center"
+            android:layout_below="@+id/login_btn"
 
+            />
 
         <Button
-            android:id="@+id/signup_link_btn"
-            android:layout_width="347dp"
-            android:layout_height="38dp"
-            android:background="@color/black"
-            android:text="Don't have an Account? Sign Up."
-            android:textColor="@color/white"
+            android:id="@+id/signin_link_btnww"
+            android:layout_width="290dp"
+            android:layout_height="37dp"
+            android:layout_below="@+id/login_btn"
+            android:background="@drawable/login_buttons_backgroundblack"
+            android:text="Sign In with Google"
             android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:drawableLeft="@drawable/googleogo"
+
 
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/login_btn"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="217dp"
-            android:layout_marginRight="10dp"
-
+            android:layout_marginTop="81dp"
+            android:layout_marginRight="20dp"
             />
 
+
+        <LinearLayout
+            android:layout_width="155dp"
+            android:layout_height="86dp"
+            android:layout_below="@+id/signin_link_btnww"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="61dp"
+
+
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="17dp"
+                android:src="@drawable/info"
+                android:tint="#FFFFFF" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="From"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/wind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Comic Republic"
+                android:textSize="12dp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
 
 
