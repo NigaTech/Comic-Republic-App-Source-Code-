@@ -50,6 +50,7 @@
     <string name="title_saved">Saved</string>
     <string name="status_saved_to_gallery">Status saved to gallery</string>
     <string name="opening_message">Opening the World Of Heroes</string>
+    <string name="opening_message_wallpaper">Opening Comic Republic Wallpaper</string>
 
     <string name="refreshcr">Refreshing Comic Republic</string>
 
@@ -72,6 +73,11 @@
     <string name="exit">Exit</string>
     <string name="title_activity_image_view">ImageViewActivity</string>
     <string name="developer_key">AIzaSyCw9IKp0PJ1E0Ze_huv7itmUvTvdL8YggE</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="welcome_text">Welcome to Fire Wallpapers</string>
 
 
 </resources>

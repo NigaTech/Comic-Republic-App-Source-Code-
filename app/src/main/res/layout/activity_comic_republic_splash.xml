@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,16 +11,29 @@
     tools:context=".ComicRepublicSplashActivity">
 
 
+
+    <ImageView
+        android:id="@+id/detail_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground"
+        android:scaleType="centerCrop"
+        android:src="@drawable/forrest"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
 
-        <pl.droidsonroids.gif.GifImageView
 
-            android:layout_width="match_parent"
-            android:layout_height="370dp"
-            android:src="@drawable/updategif" />
+
+
+
+
 
 
         <ImageView
@@ -31,6 +44,7 @@
             android:layout_centerHorizontal="true"
 
 
+            android:src="@drawable/comichomop"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="150dp"
 
@@ -59,32 +73,13 @@
             android:textSize="18dp" />
 
 
-        <Button
-            android:id="@+id/openwallpp"
-            android:layout_width="212dp"
-            android:layout_height="36dp"
-            android:gravity="center"
-            android:layout_below="@+id/logo"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="600dp"
-            android:layout_marginRight="500dp"
-            android:background="@drawable/login_buttons_transpa"
-            android:text="Wallpaper"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="18dp" />
-
-
-
-
         <TextView
             android:id="@+id/logoshs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginTop="480dp"
-            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/kavoon"
             android:gravity="center"
             android:text="A World Of Heroes"
             android:textColor="@color/white"
@@ -126,9 +121,10 @@
             android:layout_width="273dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:padding="5dp"
+            android:fontFamily="@font/nunito_sans_bold_italic"
 
             android:layout_marginEnd="50dp"
             android:text=""
@@ -141,51 +137,19 @@
             android:layout_width="273dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="50dp"
+            android:fontFamily="@font/nunito_sans_bold_italic"
+
             android:gravity="center"
             android:padding="5dp"
-
-            android:layout_marginEnd="50dp"
             android:text=""
             android:textColor="@color/white"
             android:textSize="10dp"
             android:textStyle="bold" />
 
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/tv_images"
-            android:layout_width="26dp"
-            android:layout_height="26dp"
-            android:layout_below="@+id/logo"
-            android:layout_alignParentStart="true"
 
-            android:src="@drawable/ic_account_circle_black_24dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="7dp"
-            />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/settingggg"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_below="@+id/logo"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="2dp"
-
-            android:layout_marginTop="2dp"
-            android:src="@drawable/ic_settings" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/tv_imagesssssss"
-            android:layout_width="26dp"
-            android:layout_height="26dp"
-            android:layout_below="@+id/logo"
-            android:layout_alignParentStart="true"
-
-
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="7dp"
-            />
 
 
 
@@ -197,4 +161,4 @@
 
     </RelativeLayout>
 
-</ScrollView>
+</RelativeLayout>

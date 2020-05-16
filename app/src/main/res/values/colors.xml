@@ -3,7 +3,7 @@
     <color name="colorPrimary">#E91E1E</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#F847F8</color>
-    <color name="colorBackground">#D81B60</color>
+
     <color name="whiteColor">#000000</color>
     <color name="blackfaint">#FC000000</color>
     <color name="redColor">#E91E1E</color>
@@ -29,5 +29,13 @@
 
     <color name="black_overlay">#66000000</color>
     <color name="colorGrayTrans">#c46c6c6c</color>
+
+    <color name="colorBackground">#FFFFFF</color>
+    <color name="colorText">#000000</color>
+
+    <color name="colorLight">#EDEDED</color>
+    <color name="colorDark">#000000</color>
+
+    <color name="colorSignbutt">#E91E1E</color>
 
 </resources>

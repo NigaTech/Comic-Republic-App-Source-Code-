@@ -1,18 +1,40 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+
+
+        <!-- Status Bar and Navigation Colors -->
+        <item name="android:statusBarColor">@color/colorBackground</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <item name="android:navigationBarColor">@color/redColor</item>
     </style>
+
+    <style name="ActionBarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="fontFamily">@font/nunito_sans_bold</item>
+        <item name="android:textColorPrimary">@color/colorText</item>
+    </style>
+
+
+
+
+
+
+
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/redColor</item>
+
+        <item name="android:navigationBarColor">@color/black</item>
 
     </style>
 

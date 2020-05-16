@@ -1,12 +1,10 @@
 package com.martinscomic.comicrepublic
 
 import android.app.Activity
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils
 import android.widget.Toast
 import com.firebase.ui.auth.AuthUI
 import com.google.android.gms.auth.api.signin.GoogleSignIn

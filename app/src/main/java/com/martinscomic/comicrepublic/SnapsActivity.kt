@@ -13,7 +13,6 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.ConnectivityManager
 import android.net.Uri
-import android.provider.MediaStore.Video.Thumbnails.VIDEO_ID
 import android.util.Log
 import android.view.View
 import android.webkit.*
@@ -23,12 +22,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.youtube.player.YouTubeStandalonePlayer
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_snaps.*
-import org.jetbrains.anko.toast
 import android.Manifest
 import android.os.Build
 import android.os.Environment
@@ -38,7 +35,6 @@ import android.webkit.WebViewClient
 import android.os.Bundle
 import android.webkit.DownloadListener
 import android.content.BroadcastReceiver
-import android.os.Vibrator
 import android.widget.*
 import androidx.annotation.RequiresApi
 import com.bumptech.glide.Glide
@@ -73,10 +69,12 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
     private val PERMISSION_REQUEST_CODE = 1234
     private val PermissionsRequestCode = 123
     var counter = 5
+
     var tv_image: ImageView? = null
     private val googleApiClient: GoogleApiClient? = null
     private val gso: GoogleSignInOptions? = null
     private val RC_SIGN_IN = 1
+
     lateinit var web_view: WebView
 
     private lateinit var firebaseAuth: FirebaseAuth
@@ -155,6 +153,9 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
         onDownloadComplete()
         /** Configure Web View */
         configureWebView()
+
+
+
 
 
 
@@ -294,16 +295,13 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
                 // Set the intent that will fire when the user taps the notification
                 .setPositiveButton("OKAY! \uD83D\uDE0A", DialogInterface.OnClickListener { dialogInterface, i -> })
                 .show()
-            val vibratorService = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-            vibratorService.vibrate(500)
+
 
 
         }
         FirebaseMessaging.getInstance().isAutoInitEnabled = true
         FirebaseInstanceId.getInstance().instanceId
             .addOnCompleteListener(OnCompleteListener { task ->
-                val vibratorService = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-                vibratorService.vibrate(500)
                 if (!task.isSuccessful) {
                     Log.w(TAG, "getInstanceId failed", task.exception)
                     return@OnCompleteListener
@@ -400,18 +398,27 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
             super.onPageFinished(view, url)
         }
     }
+
     private inner class MyChrome internal constructor() : WebChromeClient() {
         private var mCustomView: View? = null
         private var mCustomViewCallback: CustomViewCallback? = null
         protected var mFullscreenContainer: FrameLayout? = null
+        private val mDefaultVideoPoster: Bitmap?  = null
+        private val mVideoProgressView: View?  = null
+
         private var mOriginalOrientation = 0
         private var mOriginalSystemUiVisibility = 0
+
+
+
+
         override fun getDefaultVideoPoster(): Bitmap? {
             return if (mCustomView == null) {
+
+
                 null
             } else BitmapFactory.decodeResource(applicationContext.resources, 2130837573)
         }
-
 
         override fun onHideCustomView() {
             (window.decorView as FrameLayout).removeView(mCustomView)
@@ -422,6 +429,10 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
             mCustomViewCallback = null
         }
 
+
+
+
+
         override fun onShowCustomView(
             paramView: View,
             paramCustomViewCallback: CustomViewCallback
@@ -430,6 +441,9 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
                 onHideCustomView()
                 return
             }
+
+
+
             mCustomView = paramView
             mOriginalSystemUiVisibility = window.decorView.systemUiVisibility
             mOriginalOrientation = requestedOrientation
@@ -440,6 +454,9 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
             )
             window.decorView.systemUiVisibility = 3846
         }
+
+
+
     }
 
 

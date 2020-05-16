@@ -5,7 +5,7 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
-
+apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 
 androidExtensions {
@@ -169,14 +169,12 @@ dependencies {
     implementation 'com.github.billkainkoom:quickdialog:v0.70'
 
 
-
     //Material Design Components
     implementation 'com.google.android.material:material:1.2.0-alpha06'
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
-
 
 
 }

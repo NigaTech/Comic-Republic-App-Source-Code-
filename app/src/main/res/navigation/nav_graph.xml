@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homesFragement">
+
+    <fragment
+        android:id="@+id/homesFragement"
+        android:name="com.martinscomic.comicrepublic.HomesFragement"
+        android:label="fragment_homes"
+        tools:layout="@layout/fragment_homes" >
+        <action
+            android:id="@+id/action_homesFragement_to_registerFragement2"
+            app:destination="@id/registerFragement"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popUpTo="@id/homesFragement"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_homesFragement_to_detailFragment"
+            app:destination="@id/detailFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragement"
+        android:name="com.martinscomic.comicrepublic.RegisterFragement"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragement_to_homesFragement"
+            app:destination="@id/homesFragement"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popUpTo="@id/registerFragement"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.martinscomic.comicrepublic.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="wallpaperimage"
+            app:argType="string"
+            android:defaultValue="null" />
+    </fragment>
+</navigation>
