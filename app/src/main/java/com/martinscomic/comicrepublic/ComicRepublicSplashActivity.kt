@@ -241,7 +241,7 @@ class ComicRepublicSplashActivity : AppCompatActivity() {
         tv_email.text = ""
         tv_email.visibility = View.VISIBLE
         tv_image!!.visibility = View.VISIBLE
-        Toast.makeText(applicationContext, "image not found", Toast.LENGTH_LONG).show()
+
 
 
     }

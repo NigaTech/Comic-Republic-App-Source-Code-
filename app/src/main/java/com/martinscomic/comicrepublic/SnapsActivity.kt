@@ -1,52 +1,55 @@
 package com.martinscomic.comicrepublic
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DownloadManager
-import android.content.Context
-import android.content.DialogInterface
-import android.content.Intent
+import android.content.*
 import android.content.Intent.ACTION_VIEW
-import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.ConnectivityManager
 import android.net.Uri
+import android.os.Build
+import android.os.Bundle
+import android.os.Environment
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.webkit.*
+import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.iid.FirebaseInstanceId
-import com.google.firebase.messaging.FirebaseMessaging
-import kotlinx.android.synthetic.main.activity_snaps.*
-import android.Manifest
-import android.os.Build
-import android.os.Environment
-import android.webkit.CookieManager
-import android.webkit.URLUtil
-import android.webkit.WebViewClient
-import android.os.Bundle
-import android.webkit.DownloadListener
-import android.content.BroadcastReceiver
-import android.widget.*
-import androidx.annotation.RequiresApi
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.android.volley.RequestQueue
 import com.bumptech.glide.Glide
+import com.facebook.share.widget.AppInviteDialog.show
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
+import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessaging
+import kotlinx.android.synthetic.main.activity_comic_republic_splash.*
+import kotlinx.android.synthetic.main.activity_snaps.*
+import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.nav_header.*
+import org.jetbrains.anko.alert
 
 
-class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverListener {
+class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverListener, NavigationView.OnNavigationItemSelectedListener  {
     override fun onNetworkConnectionChanged(isConnected: Boolean) {
         if (isConnected && !pageLoadingFinished)web_view.loadUrl(urlHistory[urlHistory.size - 1])
     }
@@ -69,15 +72,29 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
     private val PERMISSION_REQUEST_CODE = 1234
     private val PermissionsRequestCode = 123
     var counter = 5
-
     var tv_image: ImageView? = null
     private val googleApiClient: GoogleApiClient? = null
-    private val gso: GoogleSignInOptions? = null
+
     private val RC_SIGN_IN = 1
-
     lateinit var web_view: WebView
-
     private lateinit var firebaseAuth: FirebaseAuth
+
+
+
+    // Create an instance of the FirebaseAuth.
+    var auth: FirebaseAuth = FirebaseAuth.getInstance()
+
+    var gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        .requestEmail()
+        .build()
+
+
+    lateinit var toolbar: Toolbar
+
+
+    lateinit var drawerLayout: DrawerLayout
+    lateinit var navView: NavigationView
+    lateinit var requestQueue: RequestQueue
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,6 +105,20 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
 
 
 
+        supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_vector_hamburger)
+
+
+        val toggle = ActionBarDrawerToggle(
+            this, drawer_layout,
+            toolbars,
+            R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer_layout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        nav_view.setNavigationItemSelectedListener(this)
+
         val gso =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -96,14 +127,25 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
         val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
         settinggggsss.setOnClickListener {
-            startActivity(Intent(this, ProfileAccountActivity::class.java))
+            val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
+            if (!drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.openDrawer(GravityCompat.START)
+            }
 
+        }
+        tv_imagesss.setOnClickListener {
+
+            val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
+            if (!drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.openDrawer(GravityCompat.START)
+            }
         }
 
 
         val mAuth = FirebaseAuth.getInstance().currentUser
         mAuth?.let {
             for (profile in it.providerData) {
+
 
 
 
@@ -114,28 +156,36 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
             }
         }
 
-        tv_imagesss.setOnClickListener {
-            startActivity(Intent(this, ProfileAccountActivity::class.java))
 
-        }
+
 
         val acct = GoogleSignIn.getLastSignedInAccount(this)
         if (acct != null) {
             Glide.with(this).load(acct.photoUrl).into(tv_imagesss)
-        }
 
+        }
 
         val user = FirebaseAuth.getInstance().currentUser
         user?.let {
             // Name, email address, and profile photo Url
-
-
-
             Glide.with(this).load(user.photoUrl).into(tv_imagessseee)
-
-
         }
 
+        val navigationView =
+            findViewById<View>(R.id.nav_view) as NavigationView
+        navigationView.setNavigationItemSelectedListener(this)
+        val headeremail =
+            navigationView.getHeaderView(0).findViewById<View>(R.id.headeremail) as TextView
+        headeremail.text = user?.email
+        val headername =
+            navigationView.getHeaderView(0).findViewById<View>(R.id.headername) as TextView
+        headername.text = user?.displayName
+        val headeremails =
+            navigationView.getHeaderView(0).findViewById<View>(R.id.headeremails) as TextView
+        headeremails.text = acct?.email
+        val headernames =
+            navigationView.getHeaderView(0).findViewById<View>(R.id.headernames) as TextView
+        headernames.text = acct?.displayName
 
 
         /** Application Context and Main Activity */
@@ -339,6 +389,7 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
         val account =
             completedTask.getResult(ApiException::class.java)
 
+
         Glide.with(this).load(account!!.photoUrl).into(tv_imagesss)
 
 
@@ -355,6 +406,7 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
 
 
     override fun onBackPressed() {
+
         if(ConnectionReceiver.isConnected) {
 
             if (urlHistory.size > 1) {
@@ -379,6 +431,9 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
 
             Toast.makeText(baseContext,"NO INTERNET CONNECTION!!", Toast.LENGTH_SHORT).show()
             pageLoadingFinished = false
+        }
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
         }
 
     }
@@ -574,6 +629,7 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
         }
     }
 
+
     private fun onDownloadComplete()
     {
         /**  Code that receives and handles broadcast intents sent by Context.sendBroadcast(Intent) */
@@ -701,6 +757,57 @@ class SnapsActivity : AppCompatActivity(),ConnectionReceiver.ConnectionRecieverL
         }
     }
 
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+
+            R.id.nav_logout -> {
+                Toast.makeText(this, "Sign out clicked", Toast.LENGTH_SHORT).show()
+                signOutGoogle()
+                FirebaseAuth.getInstance().signOut()
+                auth.signOut()
+                val intent = Intent(this, SignInActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                Toast.makeText(applicationContext,R.string.signing_out,Toast.LENGTH_LONG).show()
+                startActivity(intent)
+                finish()
+
+
+
+            }
+        }
+
+
+        return true
+        drawerLayout.closeDrawer(GravityCompat.START)
+        return true
+
+    }
+
+
+
+
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item?.itemId) {
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.nav_menu1, menu)
+        return super.onCreateOptionsMenu(menu)
+
+    }
+
+
+
+    private fun signOutGoogle() {
+        // Build a GoogleSignInClient with the options specified by gso.
+        val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+
+        mGoogleSignInClient.signOut()
+    }
 
 }
 
